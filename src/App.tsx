@@ -3,7 +3,7 @@ import { onAuthStateChanged, signInWithEmailAndPassword, signOut, type User } fr
 import { Link, Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { auth, isFirebaseConfigured } from './firebase';
 import { getAdminStatus, saveFoodDatabase, subscribeToFoodDatabase, type DatabaseSource } from './database';
-import { cloneDatabase, createCategory, flattenFoods, formatUpdatedAt, getFoodCount, getStatusLabel, seedDatabase } from './data';
+import { cloneDatabase, createCategory, flattenFoods, formatUpdatedAt, getStatusLabel, seedDatabase } from './data';
 import { validateFoodDatabase } from './validation';
 import type { Category, Food, FoodDatabase, FoodResult, FodmapStatus, Subcategory } from './types';
 
@@ -62,6 +62,7 @@ interface PublicPageProps {
 
 function PublicPage({ database, source, dataError }: PublicPageProps) {
   const [query, setQuery] = useState('');
+  const [searchScope, setSearchScope] = useState<'name' | 'content'>('name');
   const [status, setStatus] = useState<'all' | FodmapStatus>('all');
   const [categoryId, setCategoryId] = useState('all');
   const normalizedQuery = query.trim().toLocaleLowerCase();
@@ -69,23 +70,25 @@ function PublicPage({ database, source, dataError }: PublicPageProps) {
   const results = useMemo(
     () =>
       allFoods.filter((food) => {
-        const searchText = [
-          food.name,
-          ...(food.aliases ?? []),
-          food.categoryName,
-          food.subcategoryName,
-          food.note,
-          ...(food.fodmapTypes ?? []).map((type) => database.fodmapTypes[type] ?? type),
-        ]
-          .join(' ')
-          .toLocaleLowerCase();
+        const searchText = searchScope === 'name'
+          ? food.name.toLocaleLowerCase()
+          : [
+              food.name,
+              ...(food.aliases ?? []),
+              food.categoryName,
+              food.subcategoryName,
+              food.note,
+              ...(food.fodmapTypes ?? []).map((type) => database.fodmapTypes[type] ?? type),
+            ]
+              .join(' ')
+              .toLocaleLowerCase();
         return (
           (!normalizedQuery || searchText.includes(normalizedQuery)) &&
           (status === 'all' || food.status === status) &&
           (categoryId === 'all' || food.categoryId === categoryId)
         );
       }),
-    [allFoods, categoryId, database.fodmapTypes, normalizedQuery, status],
+    [allFoods, categoryId, database.fodmapTypes, normalizedQuery, searchScope, status],
   );
   const hasActiveSearch = Boolean(normalizedQuery || status !== 'all' || categoryId !== 'all');
 
@@ -101,49 +104,33 @@ function PublicPage({ database, source, dataError }: PublicPageProps) {
         </div>
       </header>
 
-      <section className="hero">
-        <div className="container hero-grid">
-          <div>
-            <p className="eyebrow">LOW FODMAP FOOD GUIDE</p>
-            <h1>今天想吃的食物，<br />先查一查。</h1>
-            <p className="hero-copy">搜尋食物，或從六大類慢慢找出適合自己的低腹敏選擇。</p>
-            <div className="hero-pills" aria-label="資料概況">
-              <span>{getFoodCount(database)} 種常見食物</span>
-              <span>6 大飲食分類</span>
-              <span>附份量提醒</span>
-            </div>
-          </div>
-          <aside className="notice-card">
-            <span className="notice-icon" aria-hidden="true">i</span>
-            <div>
-              <strong>先看份量，再看分類</strong>
-              <p>同一食物可能會隨份量、成熟度與料理方式而改變 FODMAP 含量。</p>
-            </div>
-          </aside>
-        </div>
-      </section>
-
       <section className="container search-section" aria-labelledby="search-heading">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">快速查詢</p>
-            <h2 id="search-heading">找一種食物</h2>
+            <p className="eyebrow">低腹敏飲食檢查</p>
+            <h1 id="search-heading">吃之前，先查一下</h1>
           </div>
           {source === 'seed' && isFirebaseConfigured && <span className="sync-label">資料庫尚未建立，顯示種子資料</span>}
         </div>
         {dataError && <div className="message message-error" role="alert">{dataError}</div>}
-        <div className="search-box">
-          <label className="sr-only" htmlFor="food-search">搜尋食物</label>
-          <span className="search-icon" aria-hidden="true">⌕</span>
-          <input
-            id="food-search"
-            type="search"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="例如：雞肉、豆腐、蘋果、燕麥…"
-            autoComplete="off"
-          />
-          {query && <button className="icon-button" type="button" onClick={() => setQuery('')} aria-label="清除搜尋">×</button>}
+        <div className="search-input-row">
+          <div className="search-box">
+            <label className="sr-only" htmlFor="food-search">搜尋食物</label>
+            <span className="search-icon" aria-hidden="true">⌕</span>
+            <input
+              id="food-search"
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="例如：雞肉、豆腐、蘋果、燕麥…"
+              autoComplete="off"
+            />
+            {query && <button className="icon-button" type="button" onClick={() => setQuery('')} aria-label="清除搜尋">×</button>}
+          </div>
+          <div className="search-scope-toggle" role="group" aria-label="搜尋範圍">
+            <button type="button" className={searchScope === 'name' ? 'active' : ''} aria-pressed={searchScope === 'name'} onClick={() => setSearchScope('name')}>食物名稱</button>
+            <button type="button" className={searchScope === 'content' ? 'active' : ''} aria-pressed={searchScope === 'content'} onClick={() => setSearchScope('content')}>所有內容</button>
+          </div>
         </div>
         <div className="filter-row" aria-label="搜尋篩選">
           <FilterButton active={status === 'all'} onClick={() => setStatus('all')}>全部</FilterButton>
@@ -157,7 +144,7 @@ function PublicPage({ database, source, dataError }: PublicPageProps) {
             </select>
           </label>
         </div>
-        {hasActiveSearch && <SearchResults results={results} database={database} />}
+        {hasActiveSearch && <SearchResults results={results} database={database} searchScope={searchScope} />}
       </section>
 
       <section className="container browse-section" aria-labelledby="browse-heading">
@@ -169,8 +156,8 @@ function PublicPage({ database, source, dataError }: PublicPageProps) {
           <p>展開分類，查看細項中的低腹敏與高腹敏食物。</p>
         </div>
         <div className="category-list">
-          {database.categories.map((category, index) => (
-            <CategoryAccordion key={category.id} category={category} database={database} defaultOpen={index === 0} />
+          {database.categories.map((category) => (
+            <CategoryAccordion key={category.id} category={category} database={database} defaultOpen={false} />
           ))}
         </div>
       </section>
@@ -184,10 +171,10 @@ function FilterButton({ active, onClick, children }: { active: boolean; onClick:
   return <button type="button" className={`filter-button ${active ? 'active' : ''}`} onClick={onClick}>{children}</button>;
 }
 
-function SearchResults({ results, database }: { results: FoodResult[]; database: FoodDatabase }) {
+function SearchResults({ results, database, searchScope }: { results: FoodResult[]; database: FoodDatabase; searchScope: 'name' | 'content' }) {
   return (
     <div className="search-results" aria-live="polite">
-      <p className="result-summary">找到 <strong>{results.length}</strong> 項食物</p>
+      <p className="result-summary">以「{searchScope === 'name' ? '食物名稱' : '所有內容'}」搜尋，找到 <strong>{results.length}</strong> 項食物</p>
       {results.length === 0 ? (
         <div className="empty-state">沒有符合的食物。試試較短的關鍵字，或改用分類瀏覽。</div>
       ) : (
@@ -217,7 +204,7 @@ function CategoryAccordion({ category, database, defaultOpen }: { category: Cate
 }
 
 function SubcategoryPanel({ category, subcategory, database }: { category: Category; subcategory: Subcategory; database: FoodDatabase }) {
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
   const lowFoods = subcategory.foods.filter((food) => food.status === 'low');
   const highFoods = subcategory.foods.filter((food) => food.status === 'high');
   return (
