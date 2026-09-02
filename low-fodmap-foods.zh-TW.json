@@ -1,0 +1,367 @@
+{
+  "schemaVersion": "1.0.0",
+  "title": "低腹敏（低 FODMAP）常見食物資料庫",
+  "locale": "zh-TW",
+  "updatedAt": "2026-09-02",
+  "classificationBasis": "食物以一般低 FODMAP 排除期的建議單次份量分類；status=low 代表該 note 所列份量可作為低 FODMAP 選擇，status=high 代表在一般食用量中宜於排除期避免。",
+  "medicalNotice": "低 FODMAP 是針對腸躁症等功能性腸胃症狀的短期排除、重新引介、個人化三階段飲食法，不是終身禁食或減重飲食。請由醫師或營養師評估；食物成分、成熟度、烹調與份量都會改變結果。",
+  "fodmapTypes": {
+    "fructans": "果聚醣／寡糖",
+    "gos": "半乳寡糖（GOS）",
+    "lactose": "乳糖",
+    "excessFructose": "過量果糖",
+    "polyols": "多元醇（如山梨醇、甘露醇）"
+  },
+  "sources": [
+    {
+      "name": "Monash FODMAP — High and low FODMAP foods",
+      "url": "https://monashfodmap.com/about-fodmap-and-ibs/high-and-low-fodmap-foods/",
+      "note": "主要依據；Monash 指出其 App 提供逐項食物與份量的最新實驗資料。"
+    },
+    {
+      "name": "American College of Gastroenterology — Low-FODMAP Diet",
+      "url": "https://gi.org/topics/low-fodmap-diet/",
+      "note": "臨床病人教育清單與三階段說明。"
+    },
+    {
+      "name": "臺中榮民總醫院 — 高、低腹敏食物 PDF",
+      "url": "https://www.vghtc.gov.tw/UploadFiles/WebFiles/WebPagesFiles/Files/60f67c89-e1d3-48a3-99ae-29647656a958/%E9%AB%98,%E4%BD%8E%E8%85%B9%E6%95%8F%E9%A3%9F%E7%89%A9.pdf",
+      "note": "用於補充台灣常見食材名稱；個別份量仍以最新 Monash App／營養師建議為準。"
+    }
+  ],
+  "categories": [
+    {
+      "id": "whole_grains_starches",
+      "name": "全穀雜糧類",
+      "subcategories": [
+        {
+          "id": "rice_and_rice_products",
+          "name": "米與米製品",
+          "foods": [
+            {"name":"白米／白飯","status":"low","note":"原味；不含洋蔥、蒜或高 FODMAP 醬料。"},
+            {"name":"糙米","status":"low","note":"原味。"},
+            {"name":"紫米／黑米","status":"low","note":"原味、適量。"},
+            {"name":"米粉","status":"low","note":"純米製；湯頭與肉燥常含蒜、洋蔥。"},
+            {"name":"河粉／粿條","status":"low","note":"純米製；避免以洋蔥、蒜調味的炒粿條。"},
+            {"name":"米苔目","status":"low","note":"純米製、原味。"},
+            {"name":"蘿蔔糕","status":"low","note":"限無蒜、洋蔥、蝦米調味的簡單版本；市售品須查成分。"},
+            {"name":"爆米花","status":"low","note":"原味；避免蜂蜜、糖醇或洋蔥蒜粉調味。"},
+            {"name":"米餅／米餅乾","status":"low","note":"選原味；調味品需無洋蔥、蒜、小麥與菊糖。"}
+          ]
+        },
+        {
+          "id": "other_grains",
+          "name": "其他穀物與偽穀物",
+          "foods": [
+            {"name":"燕麥／燕麥片","status":"low","note":"乾重約 1/2 杯（52 g）內；避免含蜂蜜、菊糖或小麥的穀片。"},
+            {"name":"藜麥","status":"low","note":"熟約 1 杯內。"},
+            {"name":"蕎麥","status":"low","note":"選純蕎麥製品；部分麵條混有小麥粉。"},
+            {"name":"小米","status":"low","note":"原味。"},
+            {"name":"玉米／玉米粉／玉米餅","status":"low","note":"原味；玉米脆片須確認調味。"},
+            {"name":"高粱","status":"low","note":"原味。"},
+            {"name":"無麩質麵包／麵條","status":"low","note":"僅限以米、玉米、藜麥等製作且無菊糖、豆粉、蜂蜜者；無麩質不必然低 FODMAP。"},
+            {"name":"酸種斯佩耳特小麥麵包","status":"low","note":"限真正長時間發酵的酸種款、適量；一般小麥酸種或商業麵包未必適用。"},
+            {"name":"小麥／全麥麵包","status":"high","fodmapTypes":["fructans"],"note":"排除期避免；麩質不是 FODMAP，問題主要是果聚醣。"},
+            {"name":"小麥麵／義大利麵／烏龍麵","status":"high","fodmapTypes":["fructans"],"note":"一般份量偏高；以米粉、藜麥或無麩質麵替代。"},
+            {"name":"大麥／薏仁","status":"high","fodmapTypes":["fructans"],"note":"一般食用量偏高。"},
+            {"name":"黑麥／黑麥麵包","status":"high","fodmapTypes":["fructans"],"note":"一般食用量偏高。"},
+            {"name":"麥麩／小麥胚芽","status":"high","fodmapTypes":["fructans"],"note":"濃縮小麥成分，排除期避免。"},
+            {"name":"早餐麥片／什錦穀片","status":"high","fodmapTypes":["fructans","gos"],"note":"常含小麥、乾果、蜂蜜、菊糖或豆類成分；須逐一看標示。"}
+          ]
+        },
+        {
+          "id": "roots_and_tubers",
+          "name": "根莖澱粉",
+          "foods": [
+            {"name":"馬鈴薯","status":"low","note":"原味；避免蒜泥、洋蔥、奶油乳醬。"},
+            {"name":"地瓜","status":"low","note":"熟重約 1/2 杯（75 g）內；較大份量可能因甘露醇升高。"},
+            {"name":"芋頭","status":"low","note":"小份原味；以最新 App 的品種與份量為準。"},
+            {"name":"山藥","status":"low","note":"原味、適量。"},
+            {"name":"木薯／樹薯","status":"low","note":"原味、適量。"},
+            {"name":"粉圓／珍珠","status":"low","note":"純樹薯澱粉製、少量；飲料本身的奶、果糖糖漿才是主要風險。"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "protein_foods",
+      "name": "豆魚蛋肉類",
+      "subcategories": [
+        {
+          "id": "meat_and_poultry",
+          "name": "肉類與家禽",
+          "foods": [
+            {"name":"牛肉","status":"low","note":"新鮮原肉、清蒸／乾煎；肉本身幾乎不含 FODMAP。"},
+            {"name":"豬肉","status":"low","note":"新鮮原肉；避免蒜蓉、洋蔥、醃料。"},
+            {"name":"雞肉","status":"low","note":"新鮮原肉；避免蒜蓉、洋蔥、醃料。"},
+            {"name":"火雞肉","status":"low","note":"新鮮原肉。"},
+            {"name":"羊肉","status":"low","note":"新鮮原肉。"},
+            {"name":"培根／火腿","status":"high","fodmapTypes":["fructans"],"note":"加工品常添加蒜、洋蔥、糖或乳糖；僅可在成分單純時個別確認。"},
+            {"name":"香腸／熱狗／臘肉／肉鬆","status":"high","fodmapTypes":["fructans"],"note":"加工及調味肉常含蒜、洋蔥、小麥、乳糖或糖醇。"},
+            {"name":"醃漬／調味肉","status":"high","fodmapTypes":["fructans"],"note":"醃料、烤肉醬、肉汁常含蒜與洋蔥。"}
+          ]
+        },
+        {
+          "id": "fish_and_seafood",
+          "name": "魚類與海鮮",
+          "foods": [
+            {"name":"魚類","status":"low","note":"新鮮原型魚；清蒸時可用薑、蔥綠段。"},
+            {"name":"蝦","status":"low","note":"原味；避免蒜蓉蝦與調味蝦。"},
+            {"name":"蟹","status":"low","note":"原味。"},
+            {"name":"蛤蜊／淡菜／牡蠣","status":"low","note":"原味；湯底與醬料另計。"},
+            {"name":"花枝／魷魚／章魚","status":"low","note":"原味。"},
+            {"name":"魚丸／甜不辣／蟹肉棒","status":"high","fodmapTypes":["fructans"],"note":"加工品可能含小麥、蒜、洋蔥或糖醇，先查成分。"}
+          ]
+        },
+        {
+          "id": "eggs_and_soy_products",
+          "name": "蛋與黃豆製品",
+          "foods": [
+            {"name":"雞蛋／鴨蛋","status":"low","note":"蛋幾乎不含 FODMAP；避免加洋蔥、蒜或牛奶的料理。"},
+            {"name":"板豆腐／硬豆腐","status":"low","note":"約 170 g 內；製作時瀝去含 GOS 的乳清。"},
+            {"name":"丹貝（tempeh）","status":"low","note":"約 100 g 內、原味。"},
+            {"name":"毛豆仁","status":"low","note":"約 1/2 杯（90 g）內。"},
+            {"name":"豆腐皮／腐竹","status":"low","note":"選單純黃豆製品、適量；市售滷味醬汁常含蒜、洋蔥。"},
+            {"name":"嫩豆腐／絹豆腐","status":"high","fodmapTypes":["gos"],"note":"含較多黃豆乳清，排除期避免。"},
+            {"name":"全豆豆漿","status":"high","fodmapTypes":["gos"],"note":"以整粒黃豆製者偏高；以大豆分離蛋白製的植物奶可較低。"}
+          ]
+        },
+        {
+          "id": "beans_and_pulses",
+          "name": "豆類、乾豆與豆製品",
+          "foods": [
+            {"name":"罐頭鷹嘴豆（瀝乾、沖洗）","status":"low","note":"約 1/4 杯（42 g）內；浸泡液中的 GOS 已部分流失。"},
+            {"name":"罐頭扁豆（瀝乾、沖洗）","status":"low","note":"約 1/2 杯（46 g）內。"},
+            {"name":"鷹嘴豆／鷹嘴豆泥／法拉費","status":"high","fodmapTypes":["gos"],"note":"一般份量高；鷹嘴豆泥也常含蒜。"},
+            {"name":"紅豆／紅腰豆／花豆／白豆／黑豆","status":"high","fodmapTypes":["gos"],"note":"乾豆或一般熟食份量高。"},
+            {"name":"綠豆／綠豆湯","status":"high","fodmapTypes":["gos"],"note":"一般份量高；甜湯還可能含高果糖配料。"},
+            {"name":"蠶豆／豌豆／分裂豌豆","status":"high","fodmapTypes":["gos"],"note":"一般份量高。"},
+            {"name":"烤豆／焗豆","status":"high","fodmapTypes":["gos","fructans"],"note":"豆類加洋蔥、糖漿的常見組合。"},
+            {"name":"味噌","status":"low","note":"少量調味通常可；選不含蒜、洋蔥的產品。"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dairy",
+      "name": "乳品類",
+      "subcategories": [
+        {
+          "id": "milk_and_yogurt",
+          "name": "奶、優格與發酵乳",
+          "foods": [
+            {"name":"無乳糖牛奶","status":"low","note":"優先選鈣強化品。"},
+            {"name":"無乳糖優格","status":"low","note":"確認無蜂蜜、菊糖、果泥或糖醇。"},
+            {"name":"牛奶","status":"high","fodmapTypes":["lactose"],"note":"一般 1 杯份量高乳糖。"},
+            {"name":"羊奶／山羊奶","status":"high","fodmapTypes":["lactose"],"note":"仍含乳糖，並非低 FODMAP 替代品。"},
+            {"name":"一般優格／優酪乳","status":"high","fodmapTypes":["lactose"],"note":"多數一般份量乳糖高；無乳糖版本例外。"},
+            {"name":"冰淇淋／冷凍優格","status":"high","fodmapTypes":["lactose"],"note":"多含乳糖，並可能添加高果糖糖漿。"},
+            {"name":"煉乳／奶精／卡士達醬","status":"high","fodmapTypes":["lactose"],"note":"濃縮乳糖，排除期避免。"}
+          ]
+        },
+        {
+          "id": "cheese_and_fats",
+          "name": "起司與乳脂",
+          "foods": [
+            {"name":"硬質起司（切達、帕瑪森、瑞士）","status":"low","note":"乳糖通常極低；留意調味起司的蒜、洋蔥。"},
+            {"name":"菲達起司／布里／卡門貝爾","status":"low","note":"小份量通常可；份量及品牌仍有差異。"},
+            {"name":"奶油／酥油","status":"low","note":"乳糖極低；但高脂可能本身引發部分人的腸胃不適。"},
+            {"name":"乳清蛋白分離物","status":"low","note":"選 isolate 且不含菊糖、糖醇者；濃縮乳清蛋白則另計。"},
+            {"name":"瑞可塔／茅屋起司／奶油乳酪","status":"high","fodmapTypes":["lactose"],"note":"一般份量乳糖較高。"},
+            {"name":"鮮奶油／酸奶油","status":"high","fodmapTypes":["lactose"],"note":"一般份量乳糖偏高。"}
+          ]
+        },
+        {
+          "id": "plant_based_alternatives",
+          "name": "植物性奶替代品",
+          "foods": [
+            {"name":"杏仁奶","status":"low","note":"選原味、鈣強化且無菊糖／糖醇。"},
+            {"name":"米奶","status":"low","note":"選原味、鈣強化且無高 FODMAP 添加物。"},
+            {"name":"大豆分離蛋白製豆奶","status":"low","note":"以 soy protein 製，不是整粒黃豆製。"},
+            {"name":"麻籽奶","status":"low","note":"選原味、鈣強化且無高 FODMAP 添加物。"},
+            {"name":"椰子優格","status":"low","note":"小份量、確認無菊糖／糖醇；不同品牌差異大。"},
+            {"name":"整粒黃豆製豆奶","status":"high","fodmapTypes":["gos"],"note":"全豆製法保留較多 GOS。"},
+            {"name":"椰奶飲／罐裝椰奶","status":"high","fodmapTypes":["polyols"],"note":"不同濃度與份量差異很大；一般大量飲用／使用偏高。"},
+            {"name":"燕麥奶","status":"high","fodmapTypes":["fructans"],"note":"許多品牌在一般飲用量偏高；依產品與份量確認。"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vegetables",
+      "name": "蔬菜類",
+      "subcategories": [
+        {
+          "id": "leafy_and_brassicas",
+          "name": "葉菜與十字花科",
+          "foods": [
+            {"name":"青江菜／小白菜","status":"low","note":"原味。"},
+            {"name":"大白菜／白菜","status":"low","note":"原味。"},
+            {"name":"高麗菜","status":"low","note":"約 3/4 杯內；大份量仍可能累積 FODMAP。"},
+            {"name":"萵苣／美生菜／蘿蔓","status":"low","note":"原味。"},
+            {"name":"菠菜","status":"low","note":"原味。"},
+            {"name":"羽衣甘藍","status":"low","note":"原味、適量。"},
+            {"name":"芥藍／芥菜","status":"low","note":"原味、適量。"},
+            {"name":"芝麻葉","status":"low","note":"原味。"},
+            {"name":"花椰菜","status":"high","fodmapTypes":["fructans","polyols"],"note":"一般份量偏高。"},
+            {"name":"抱子甘藍","status":"high","fodmapTypes":["fructans"],"note":"一般份量偏高；小份量可能可耐受。"},
+            {"name":"皺葉甘藍","status":"high","fodmapTypes":["fructans"],"note":"一般份量偏高。"}
+          ]
+        },
+        {
+          "id": "fruiting_and_root_vegetables",
+          "name": "瓜果、根菜與其他蔬菜",
+          "foods": [
+            {"name":"胡蘿蔔","status":"low","note":"原味。"},
+            {"name":"小黃瓜／大黃瓜","status":"low","note":"原味。"},
+            {"name":"番茄／小番茄","status":"low","note":"原味；番茄醬需查蒜、洋蔥與糖。"},
+            {"name":"茄子","status":"low","note":"原味。"},
+            {"name":"櫛瓜／夏南瓜","status":"low","note":"約 1/2 杯（65 g）內。"},
+            {"name":"青椒／甜椒","status":"low","note":"綠甜椒最穩妥；紅椒份量依個人耐受。"},
+            {"name":"四季豆／菜豆","status":"low","note":"約 15 根（75 g）內。"},
+            {"name":"豆芽菜","status":"low","note":"原味、適量。"},
+            {"name":"竹筍","status":"low","note":"原味、適量。"},
+            {"name":"秋葵","status":"low","note":"原味、適量。"},
+            {"name":"白蘿蔔","status":"low","note":"原味。"},
+            {"name":"櫻桃蘿蔔","status":"low","note":"原味。"},
+            {"name":"荸薺","status":"low","note":"原味、適量。"},
+            {"name":"海帶／海苔／紫菜","status":"low","note":"原味；調味海苔需查蒜、洋蔥粉。"},
+            {"name":"甜玉米","status":"low","note":"約 1/2 根或 1/2 杯內。"},
+            {"name":"蘆筍","status":"high","fodmapTypes":["fructans"],"note":"一般份量偏高。"},
+            {"name":"朝鮮薊","status":"high","fodmapTypes":["fructans"],"note":"一般份量偏高。"},
+            {"name":"芹菜","status":"high","fodmapTypes":["polyols"],"note":"一般份量甘露醇偏高。"},
+            {"name":"甜豆／荷蘭豆","status":"high","fodmapTypes":["polyols"],"note":"一般份量偏高。"},
+            {"name":"甜菜根","status":"high","fodmapTypes":["fructans"],"note":"一般份量偏高。"}
+          ]
+        },
+        {
+          "id": "alliums_and_mushrooms",
+          "name": "蔥蒜類與菇類",
+          "foods": [
+            {"name":"青蔥綠段／蔥葉","status":"low","note":"只使用綠色部分；白色球莖高 FODMAP。"},
+            {"name":"韭菜葉","status":"low","note":"少量調味；根部與大量食用另計。"},
+            {"name":"薑","status":"low","note":"可作為調味替代。"},
+            {"name":"蒜香油（濾去蒜粒）","status":"low","note":"FODMAP 水溶、不溶於油；不可保留蒜粒。"},
+            {"name":"平菇／蠔菇","status":"low","note":"原味、適量。"},
+            {"name":"洋蔥／紅蔥頭","status":"high","fodmapTypes":["fructans"],"note":"排除期避免；粉末、油蔥酥與高湯也常含。"},
+            {"name":"大蒜／蒜泥／蒜粉","status":"high","fodmapTypes":["fructans"],"note":"排除期避免。"},
+            {"name":"青蔥白段／蔥白","status":"high","fodmapTypes":["fructans"],"note":"改用綠段。"},
+            {"name":"韭蔥／洋蔥苗","status":"high","fodmapTypes":["fructans"],"note":"白色部分特別高。"},
+            {"name":"洋菇／香菇／波特貝勒菇","status":"high","fodmapTypes":["polyols"],"note":"一般份量含較多甘露醇；乾香菇更應避免。"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fruits",
+      "name": "水果類",
+      "subcategories": [
+        {
+          "id": "low_fodmap_fruits",
+          "name": "可選水果（依份量）",
+          "foods": [
+            {"name":"未過熟香蕉","status":"low","note":"約 1 根中小型；越熟的香蕉份量上限可能較低。"},
+            {"name":"藍莓","status":"low","note":"約 1/4 杯（40 g）內。"},
+            {"name":"草莓","status":"low","note":"約 5 顆中型（65 g）內。"},
+            {"name":"葡萄","status":"low","note":"約 6 顆（28 g）內。"},
+            {"name":"奇異果","status":"low","note":"約 2 顆小型（150 g）內。"},
+            {"name":"柳橙／橙","status":"low","note":"約 1 顆中型。"},
+            {"name":"橘子／柑橘","status":"low","note":"約 1 顆中型。"},
+            {"name":"檸檬／萊姆","status":"low","note":"可作調味或飲品。"},
+            {"name":"木瓜","status":"low","note":"約 1 杯切塊內。"},
+            {"name":"鳳梨","status":"low","note":"約 1 杯切塊內；罐頭糖漿／果汁另計。"},
+            {"name":"哈密瓜／香瓜","status":"low","note":"約 3/4 杯切塊內。"},
+            {"name":"火龍果","status":"low","note":"約 1 杯切塊內。"},
+            {"name":"百香果","status":"low","note":"約 2 顆果肉內。"},
+            {"name":"覆盆子","status":"low","note":"約 30 g 內。"},
+            {"name":"蔓越莓（新鮮）","status":"low","note":"原味、適量；果乾及果汁糖分／FODMAP 較高。"},
+            {"name":"榴槤","status":"low","note":"小份量；高脂與份量仍可能造成不適。"},
+            {"name":"楊桃","status":"low","note":"小份量；腎臟病患者不得食用，與 FODMAP 無關。"}
+          ]
+        },
+        {
+          "id": "high_fodmap_fruits",
+          "name": "排除期避免水果",
+          "foods": [
+            {"name":"蘋果／蘋果汁","status":"high","fodmapTypes":["excessFructose","polyols"],"note":"常同時含過量果糖與山梨醇。"},
+            {"name":"梨／亞洲梨","status":"high","fodmapTypes":["excessFructose","polyols"],"note":"常同時含過量果糖與山梨醇。"},
+            {"name":"芒果","status":"high","fodmapTypes":["excessFructose"],"note":"一般份量偏高。"},
+            {"name":"西瓜","status":"high","fodmapTypes":["excessFructose","polyols"],"note":"一般份量偏高。"},
+            {"name":"櫻桃","status":"high","fodmapTypes":["excessFructose","polyols"],"note":"一般份量偏高。"},
+            {"name":"桃子／水蜜桃","status":"high","fodmapTypes":["polyols"],"note":"一般份量山梨醇偏高。"},
+            {"name":"油桃","status":"high","fodmapTypes":["polyols"],"note":"一般份量偏高。"},
+            {"name":"李子／梅子","status":"high","fodmapTypes":["polyols"],"note":"一般份量偏高。"},
+            {"name":"杏桃","status":"high","fodmapTypes":["polyols"],"note":"一般份量偏高。"},
+            {"name":"荔枝","status":"high","fodmapTypes":["excessFructose"],"note":"一般份量偏高。"},
+            {"name":"龍眼","status":"high","fodmapTypes":["excessFructose"],"note":"一般份量偏高。"},
+            {"name":"無花果","status":"high","fodmapTypes":["excessFructose"],"note":"鮮果與果乾皆要避免。"},
+            {"name":"柿子","status":"high","fodmapTypes":["excessFructose"],"note":"一般份量偏高。"},
+            {"name":"酪梨","status":"high","fodmapTypes":["polyols"],"note":"一般份量山梨醇偏高；極小份量可能可行。"},
+            {"name":"黑莓","status":"high","fodmapTypes":["polyols"],"note":"一般份量偏高。"},
+            {"name":"石榴","status":"high","fodmapTypes":["fructans"],"note":"一般份量偏高。"},
+            {"name":"葡萄柚","status":"high","fodmapTypes":["excessFructose"],"note":"一般份量偏高，且可能與藥物交互作用。"},
+            {"name":"芭樂","status":"high","fodmapTypes":["excessFructose"],"note":"一般份量偏高；以最新 App 與品種／份量確認。"},
+            {"name":"果乾（葡萄乾、蜜餞、紅棗等）","status":"high","fodmapTypes":["excessFructose","polyols"],"note":"脫水後 FODMAP 濃縮，排除期避免。"},
+            {"name":"罐頭水果（糖漿）／果汁","status":"high","fodmapTypes":["excessFructose"],"note":"優先選完整低 FODMAP 水果；糖漿、濃縮果汁常偏高。"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oils_nuts_seeds",
+      "name": "油脂與堅果種子類",
+      "subcategories": [
+        {
+          "id": "oils_and_fats",
+          "name": "油脂",
+          "foods": [
+            {"name":"橄欖油","status":"low","note":"油脂不含 FODMAP；但高脂本身可能引起部分人不適。"},
+            {"name":"芥花油／菜籽油","status":"low","note":"油脂不含 FODMAP。"},
+            {"name":"苦茶油／芝麻油／花生油","status":"low","note":"油脂不含 FODMAP。"},
+            {"name":"椰子油","status":"low","note":"油脂不含 FODMAP。"},
+            {"name":"豬油／牛油","status":"low","note":"油脂不含 FODMAP；留意高脂耐受度。"},
+            {"name":"蒜香油（已濾渣）","status":"low","note":"可用來替代蒜味；不可含蒜粒。"}
+          ]
+        },
+        {
+          "id": "nuts",
+          "name": "堅果",
+          "foods": [
+            {"name":"花生","status":"low","note":"約 32 g 內；原味最佳。"},
+            {"name":"核桃","status":"low","note":"約 30 g 內。"},
+            {"name":"夏威夷豆","status":"low","note":"約 40 g 內。"},
+            {"name":"松子","status":"low","note":"約 14 g 內。"},
+            {"name":"巴西堅果","status":"low","note":"約 10 顆（30 g）內。"},
+            {"name":"杏仁","status":"low","note":"約 10 顆（12 g）內；更多時 GOS／果聚醣會升高。"},
+            {"name":"榛果","status":"low","note":"約 10 顆（15 g）內；更多時可能升高。"},
+            {"name":"腰果","status":"high","fodmapTypes":["gos","fructans"],"note":"一般份量偏高。"},
+            {"name":"開心果","status":"high","fodmapTypes":["gos","fructans"],"note":"一般份量偏高。"},
+            {"name":"綜合堅果／調味堅果","status":"high","fodmapTypes":["gos","fructans"],"note":"常含腰果、開心果或蒜／洋蔥粉；應逐項確認。"}
+          ]
+        },
+        {
+          "id": "seeds_and_spreads",
+          "name": "種子與抹醬",
+          "foods": [
+            {"name":"南瓜子","status":"low","note":"約 2 湯匙（23 g）內。"},
+            {"name":"葵花子","status":"low","note":"約 2 湯匙（23 g）內。"},
+            {"name":"芝麻","status":"low","note":"約 1 湯匙（11 g）內。"},
+            {"name":"奇亞籽","status":"low","note":"約 2 湯匙（24 g）內；需配足水分。"},
+            {"name":"亞麻籽／胡麻籽","status":"low","note":"約 1 湯匙（15 g）內。"},
+            {"name":"大麻籽","status":"low","note":"約 2 湯匙（20 g）內。"},
+            {"name":"花生醬","status":"low","note":"約 2 湯匙（50 g）內，選無蜂蜜、菊糖與糖醇者。"},
+            {"name":"芝麻醬／Tahini","status":"low","note":"約 1 湯匙（20 g）內；市售拌醬須確認蒜、洋蔥。"},
+            {"name":"腰果醬","status":"high","fodmapTypes":["gos","fructans"],"note":"由高 FODMAP 腰果製成。"},
+            {"name":"開心果醬","status":"high","fodmapTypes":["gos","fructans"],"note":"由高 FODMAP 開心果製成。"}
+          ]
+        }
+      ]
+    }
+  ],
+  "implementationNotes": [
+    "檢查複合食品的成分表：洋蔥、蒜、蜂蜜、高果糖玉米糖漿、菊糖／菊苣根、FOS、GOS，以及 -ol 結尾的糖醇（如山梨醇、木糖醇、麥芽糖醇）通常是高 FODMAP 警訊。",
+    "同一餐多種低 FODMAP 食物的 FODMAP 可能累加（stacking）；資料中的低狀態不代表可無限量食用。",
+    "肉、蛋、魚與純油脂本身幾乎不含 FODMAP；分類變高通常是因加工、醃漬、醬料或填充物。",
+    "本檔為常見食物的初始資料庫，並非所有食材的完整檢測清單；新食材與精確份量請以最新 Monash FODMAP Diet App 與合格營養師建議更新。"
+  ]
+}

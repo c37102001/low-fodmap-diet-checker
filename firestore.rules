@@ -1,0 +1,31 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isActiveAdmin() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+        && get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.active == true;
+    }
+
+    // 公開頁只需讀取這一份經審核的食物資料。
+    match /appData/foodDatabase {
+      allow read: if true;
+      allow create, update, delete: if isActiveAdmin();
+    }
+
+    // 使用者只能讀自己的管理員資格；管理員名單僅能由 Firebase Console / Admin SDK 維護。
+    match /admins/{uid} {
+      allow get: if signedIn() && request.auth.uid == uid;
+      allow list, create, update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
