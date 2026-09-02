@@ -90,7 +90,7 @@ function PublicPage({ database, source, dataError }: PublicPageProps) {
       }),
     [allFoods, categoryId, database.fodmapTypes, normalizedQuery, searchScope, status],
   );
-  const hasActiveSearch = Boolean(normalizedQuery || status !== 'all' || categoryId !== 'all');
+  const hasActiveSearch = Boolean(normalizedQuery);
 
   return (
     <main>
@@ -134,8 +134,8 @@ function PublicPage({ database, source, dataError }: PublicPageProps) {
         </div>
         <div className="filter-row" aria-label="搜尋篩選">
           <FilterButton active={status === 'all'} onClick={() => setStatus('all')}>全部</FilterButton>
-          <FilterButton active={status === 'low'} onClick={() => setStatus('low')}><span className="dot dot-low" />低腹敏</FilterButton>
-          <FilterButton active={status === 'high'} onClick={() => setStatus('high')}><span className="dot dot-high" />高腹敏</FilterButton>
+          <FilterButton active={status === 'low'} tone="low" onClick={() => setStatus('low')}><span className="dot dot-low" />低腹敏</FilterButton>
+          <FilterButton active={status === 'high'} tone="high" onClick={() => setStatus('high')}><span className="dot dot-high" />高腹敏</FilterButton>
           <label className="category-select">
             <span className="sr-only">依飲食分類篩選</span>
             <select value={categoryId} onChange={(event) => setCategoryId(event.target.value)}>
@@ -157,7 +157,7 @@ function PublicPage({ database, source, dataError }: PublicPageProps) {
         </div>
         <div className="category-list">
           {database.categories.map((category) => (
-            <CategoryAccordion key={category.id} category={category} database={database} defaultOpen={false} />
+            <CategoryAccordion key={category.id} category={category} database={database} defaultOpen={false} statusFilter={status} />
           ))}
         </div>
       </section>
@@ -167,8 +167,8 @@ function PublicPage({ database, source, dataError }: PublicPageProps) {
   );
 }
 
-function FilterButton({ active, onClick, children }: { active: boolean; onClick: () => void; children: ReactNode }) {
-  return <button type="button" className={`filter-button ${active ? 'active' : ''}`} onClick={onClick}>{children}</button>;
+function FilterButton({ active, tone = 'neutral', onClick, children }: { active: boolean; tone?: 'neutral' | FodmapStatus; onClick: () => void; children: ReactNode }) {
+  return <button type="button" className={`filter-button ${tone} ${active ? 'active' : ''}`} onClick={onClick}>{children}</button>;
 }
 
 function SearchResults({ results, database, searchScope }: { results: FoodResult[]; database: FoodDatabase; searchScope: 'name' | 'content' }) {
@@ -186,35 +186,38 @@ function SearchResults({ results, database, searchScope }: { results: FoodResult
   );
 }
 
-function CategoryAccordion({ category, database, defaultOpen }: { category: Category; database: FoodDatabase; defaultOpen: boolean }) {
+function CategoryAccordion({ category, database, defaultOpen, statusFilter }: { category: Category; database: FoodDatabase; defaultOpen: boolean; statusFilter: 'all' | FodmapStatus }) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
-  const total = category.subcategories.reduce((count, subcategory) => count + subcategory.foods.length, 0);
+  const total = category.subcategories.reduce(
+    (count, subcategory) => count + subcategory.foods.filter((food) => statusFilter === 'all' || food.status === statusFilter).length,
+    0,
+  );
   return (
     <article className={`category-card ${isOpen ? 'open' : ''}`}>
       <button className="category-toggle" type="button" aria-expanded={isOpen} onClick={() => setIsOpen(!isOpen)}>
         <span className="category-number">{String(database.categories.findIndex((item) => item.id === category.id) + 1).padStart(2, '0')}</span>
-        <span className="category-title"><strong>{category.name}</strong><small>{total} 項食物 · {category.subcategories.length} 個細項</small></span>
+        <span className="category-title"><strong>{category.name}</strong><small>{total} 項{statusFilter === 'all' ? '食物' : getStatusLabel(statusFilter)} · {category.subcategories.length} 個細項</small></span>
         <span className="chevron" aria-hidden="true">⌄</span>
       </button>
       {isOpen && <div className="subcategory-list">
-        {category.subcategories.map((subcategory) => <SubcategoryPanel key={subcategory.id} subcategory={subcategory} category={category} database={database} />)}
+        {category.subcategories.map((subcategory) => <SubcategoryPanel key={subcategory.id} subcategory={subcategory} category={category} database={database} statusFilter={statusFilter} />)}
       </div>}
     </article>
   );
 }
 
-function SubcategoryPanel({ category, subcategory, database }: { category: Category; subcategory: Subcategory; database: FoodDatabase }) {
+function SubcategoryPanel({ category, subcategory, database, statusFilter }: { category: Category; subcategory: Subcategory; database: FoodDatabase; statusFilter: 'all' | FodmapStatus }) {
   const [expanded, setExpanded] = useState(false);
   const lowFoods = subcategory.foods.filter((food) => food.status === 'low');
   const highFoods = subcategory.foods.filter((food) => food.status === 'high');
+  const visibleStatuses: FodmapStatus[] = statusFilter === 'all' ? ['low', 'high'] : [statusFilter];
   return (
     <section className="subcategory-panel">
       <button className="subcategory-toggle" type="button" onClick={() => setExpanded(!expanded)} aria-expanded={expanded}>
         <span>{subcategory.name}</span><span>{expanded ? '−' : '+'}</span>
       </button>
-      {expanded && <div className="status-columns">
-        <FoodColumn status="low" foods={lowFoods} category={category} subcategory={subcategory} database={database} />
-        <FoodColumn status="high" foods={highFoods} category={category} subcategory={subcategory} database={database} />
+      {expanded && <div className={`status-columns ${statusFilter !== 'all' ? 'single-column' : ''}`}>
+        {visibleStatuses.map((visibleStatus) => <FoodColumn key={visibleStatus} status={visibleStatus} foods={visibleStatus === 'low' ? lowFoods : highFoods} category={category} subcategory={subcategory} database={database} />)}
       </div>}
     </section>
   );
